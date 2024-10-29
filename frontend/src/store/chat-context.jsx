@@ -17,7 +17,10 @@ function messageReducer(state, action) {
 
 export default function ChatContextProvider({ children }) {
   const [messageState, messageDispatch] = useReducer(messageReducer, {
-    messages: [],
+    messages: [{ message: "Hello, I am ChatBot!", sender: "ChatBot", id: 0 },
+      { message: "I am user :)", sender: "user", id: 1 },
+      { message: "How can I help you?", sender: "ChatBot", id: 2 },
+    { message: "I am looking for a book", sender: "user", id:3}],
   });
 
   function addMessage(message) {

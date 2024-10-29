@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
 
 export const ChatContext = createContext({
-  messages: [{ message: "Hello, I am ChatBot!", sender: "ChatBot" }],
+  messages: [{ message: "Hello, I am ChatBot!", sender: "ChatBot", id: 0 }],
   addMessage: () => {},
 });
 

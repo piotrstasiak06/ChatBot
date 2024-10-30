@@ -4,11 +4,5 @@ W projekcie muszązostać skonfigurowane reguły CORS.
 
 **Preview nowoczesnego designu**
 
-![image](https://github.com/user-attachments/assets/4c58055c-7bfa-45d7-8c92-e22df83195b6)
-
-*Narazie tylko wygląda (nie działa)
-
-**Preview nowoczesnej animacji lołdingu mejn skrina**
-
-https://github.com/user-attachments/assets/7ba3fb98-6e03-4673-85b4-0ba16eb993d2
+![image](https://github.com/user-attachments/assets/bcaa0cf8-6ade-4e6b-9d85-0b7fa450afe6)
 

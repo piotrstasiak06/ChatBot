@@ -200,7 +200,9 @@ header h1 span {
   height: 32px; /* Adjust size as needed */
 }
 
-
+.audio-controls {
+  width: 100%;
+}
 
 .voice .voice-stop {
   width: 16px;

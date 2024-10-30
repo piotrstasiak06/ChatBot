@@ -5,6 +5,27 @@
 :root {
   --primary-color: #EFF4FF;
   --secondary-color: #F3F3F3;
+  --quaternary-color: #aaa4a4;
+  --tertiary-color: #e0dfdf;
+}
+
+/* Custom scrollbar styling */
+.message-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.message-container::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+.message-container::-webkit-scrollbar-thumb {
+  background: var(--tertiary-color);
+  border-radius: 10px;
+}
+
+.message-container::-webkit-scrollbar-thumb:hover {
+  background: var(--quaternary-color);
 }
 
 
@@ -33,7 +54,8 @@ body {
 header {
   max-width: 50rem;
   min-width: 15rem;
-  margin: 2rem auto;
+  margin: 0 auto;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   font-family: 'Inter', sans-serif;
   text-align: center;
@@ -58,6 +80,7 @@ header h1 span {
   font-size: 0.8em; /* Adjust the size as needed */
   vertical-align: top;
 }
+
 
 .input {
   position: fixed;
@@ -96,13 +119,14 @@ header h1 span {
   max-width: 50rem;
   min-width: 20rem;
   margin: 0 auto;
-  /* padding: 1rem; */
+  padding: 1rem;
   background-color: transparent;
   border-radius: 0.5rem;
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); to remove */
   /* overflow-y: auto; */
-  height: calc(100vh - 17rem); /* Adjust height as needed */
+  height: calc(100vh - 14rem); /* Adjust height as needed */
   display: flex;
+  overflow-y: auto;
   flex-direction: column-reverse;
   
 }
@@ -152,13 +176,20 @@ header h1 span {
 .loader {
   width: 50px;
   height: 50px;
-  background-image: url("./assets/loader/Property1=Frame1.png");
+  /* background-image: url("./assets/loader/Property1=Frame1.png"); */
   background-size: cover;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  animation: loaderAnimation 2s steps(1) infinite;
+  /* animation: loaderAnimation 2s steps(1) infinite; */
+}
+
+
+
+.loader img {
+  width: 100%;
+  height: 100%;
 }
 
 .input input {
@@ -203,312 +234,5 @@ header h1 span {
   100% {
     background-color: #333333;
     transform: scale(1.03);
-  }
-}
-
-@keyframes loaderAnimation {
-  0% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  1% {
-    background-image: url("./assets/loader/Property1=Frame2.png");
-  }
-  2% {
-    background-image: url("./assets/loader/Property1=Frame3.png");
-  }
-  3% {
-    background-image: url("./assets/loader/Property1=Frame4.png");
-  }
-  4% {
-    background-image: url("./assets/loader/Property1=Frame5.png");
-  }
-  5% {
-    background-image: url("./assets/loader/Property1=Frame6.png");
-  }
-  6% {
-    background-image: url("./assets/loader/Property1=Frame7.png");
-  }
-  7% {
-    background-image: url("./assets/loader/Property1=Frame8.png");
-  }
-  8% {
-    background-image: url("./assets/loader/Property1=Frame9.png");
-  }
-  9% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  10% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  11% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  12% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  13% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  14% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  15% {
-    background-image: url("./assets/loader/Property1=Frame11.png");
-  }
-  16% {
-    background-image: url("./assets/loader/Property1=Frame12.png");
-  }
-  17% {
-    background-image: url("./assets/loader/Property1=Frame13.png");
-  }
-  18% {
-    background-image: url("./assets/loader/Property1=Frame14.png");
-  }
-  19% {
-    background-image: url("./assets/loader/Property1=Frame15.png");
-  }
-  20% {
-    background-image: url("./assets/loader/Property1=Frame16.png");
-  }
-  21% {
-    background-image: url("./assets/loader/Property1=Frame17.png");
-  }
-  22% {
-    background-image: url("./assets/loader/Property1=Frame16.png");
-  }
-  23% {
-    background-image: url("./assets/loader/Property1=Frame15.png");
-  }
-  24% {
-    background-image: url("./assets/loader/Property1=Frame14.png");
-  }
-  25% {
-    background-image: url("./assets/loader/Property1=Frame13.png");
-  }
-  26% {
-    background-image: url("./assets/loader/Property1=Frame12.png");
-  }
-  27% {
-    background-image: url("./assets/loader/Property1=Frame11.png");
-  }
-  28% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  29% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  30% {
-    background-image: url("./assets/loader/Property1=Frame11.png");
-  }
-  31% {
-    background-image: url("./assets/loader/Property1=Frame12.png");
-  }
-  32% {
-    background-image: url("./assets/loader/Property1=Frame13.png");
-  }
-  33% {
-    background-image: url("./assets/loader/Property1=Frame14.png");
-  }
-  34% {
-    background-image: url("./assets/loader/Property1=Frame15.png");
-  }
-  35% {
-    background-image: url("./assets/loader/Property1=Frame16.png");
-  }
-  36% {
-    background-image: url("./assets/loader/Property1=Frame17.png");
-  }
-  37% {
-    background-image: url("./assets/loader/Property1=Frame17.png");
-  }
-  38% {
-    background-image: url("./assets/loader/Property1=Frame17.png");
-  }
-  39% {
-    background-image: url("./assets/loader/Property1=Frame17.png");
-  }
-  40% {
-    background-image: url("./assets/loader/Property1=Frame17.png");
-  }
-  41% {
-    background-image: url("./assets/loader/Property1=Frame17.png");
-  }
-  42% {
-    background-image: url("./assets/loader/Property1=Frame16.png");
-  }
-  43% {
-    background-image: url("./assets/loader/Property1=Frame15.png");
-  }
-  44% {
-    background-image: url("./assets/loader/Property1=Frame14.png");
-  }
-  45% {
-    background-image: url("./assets/loader/Property1=Frame13.png");
-  }
-  46% {
-    background-image: url("./assets/loader/Property1=Frame12.png");
-  }
-  47% {
-    background-image: url("./assets/loader/Property1=Frame11.png");
-  }
-  48% {
-    background-image: url("./assets/loader/Property1=Frame10.png");
-  }
-  49% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  50% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  51% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  52% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  53% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  54% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  55% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  56% {
-    background-image: url("./assets/loader/Property1=Frame18.png");
-  }
-  57% {
-    background-image: url("./assets/loader/Property1=Frame19.png");
-  }
-  58% {
-    background-image: url("./assets/loader/Property1=Frame19.png");
-  }
-  59% {
-    background-image: url("./assets/loader/Property1=Frame20.png");
-  }
-  60% {
-    background-image: url("./assets/loader/Property1=Frame20.png");
-  }
-  61% {
-    background-image: url("./assets/loader/Property1=Frame21.png");
-  }
-  62% {
-    background-image: url("./assets/loader/Property1=Frame22.png");
-  }
-  63% {
-    background-image: url("./assets/loader/Property1=Frame23.png");
-  }
-  64% {
-    background-image: url("./assets/loader/Property1=Frame24.png");
-  }
-  65% {
-    background-image: url("./assets/loader/Property1=Frame25.png");
-  }
-
-  66% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  67% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  68% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  69% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  70% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  71% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  72% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  73% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  74% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  75% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  76% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  77% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  78% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  79% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  80% {
-    background-image: url("./assets/loader/Property1=Frame26.png");
-  }
-  81% {
-    background-image: url("./assets/loader/Property1=Frame25.png");
-  }
-  82% {
-    background-image: url("./assets/loader/Property1=Frame27.png");
-  }
-  83% {
-    background-image: url("./assets/loader/Property1=Frame28.png");
-  }
-  84% {
-    background-image: url("./assets/loader/Property1=Frame29.png");
-  }
-  85% {
-    background-image: url("./assets/loader/Property1=Frame30.png");
-  }
-  86% {
-    background-image: url("./assets/loader/Property1=Frame31.png");
-  }
-  87% {
-    background-image: url("./assets/loader/Property1=Frame32.png");
-  }
-  88% {
-    background-image: url("./assets/loader/Property1=Frame33.png");
-  }
-  89% {
-    background-image: url("./assets/loader/Property1=Frame34.png");
-  }
-  90% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  91% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  92% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  93% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  94% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  95% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  96% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  97% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  98% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  99% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
-  }
-  100% {
-    background-image: url("./assets/loader/Property1=Frame1.png");
   }
 }

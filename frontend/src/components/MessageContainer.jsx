@@ -54,6 +54,8 @@ export default function MessageContainer() {
             <div className="message-content">
               {message.sender === "ChatBot" ? (
                   <p><strong>{message.sender}:</strong> {message.message}</p>
+              ) : message.type === 'audio' ? (
+                  <audio controls src={message.message} />
               ) : (
                   <p>{message.message}</p>
               )}

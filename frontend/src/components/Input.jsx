@@ -5,25 +5,28 @@ import VoiceRecorder from "./voiceRecorder";
 
 export default function Input() {
   const { messages, addMessage } = useContext(ChatContext);
+  const [error, setError] = useState('');
   const [enteredMessage, setEnteredMessage] = useState({
     message: "",
   });
 
 
-  function handleInputChange(id, value) {
-    setEnteredMessage((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  }
+  const handleInputChange = (name, value) => {
+    setEnteredMessage({ ...enteredMessage, [name]: value });
+  };
 
-  function handleSubmitMessage(event) {
+  const handleSubmitMessage = (event) => {
     event.preventDefault();
-    addMessage(enteredMessage);
+    if (enteredMessage.message.trim() === "") {
+      setError("Message cannot be empty");
+      return;
+    }
+    addMessage(enteredMessage.message);
     setEnteredMessage({ message: "" });
+    setError("");
     console.log("Entered message: ", enteredMessage);
     console.log("Context messages: ", messages);
-  }
+  };
 
   return (
     <>

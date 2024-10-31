@@ -1,4 +1,4 @@
-import { useRef} from "react";
+import { useRef, useState} from "react";
 import microphone from "../assets/icons8-mic-80.png";
 import stop from "../assets/32px-Solid_white.svg.png";
 import { useContext } from "react";
@@ -9,12 +9,14 @@ const VoiceRecorder = () => {
   const { addMessage } = useContext(ChatContext);
 
 //   const [recordedUrl, setRecordedUrl] = useState("");
+  const [recording, setRecording] = useState(false);
   const mediaStream = useRef(null);
   const mediaRecorder = useRef(null);
   const chunks = useRef([]);
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      setRecording(true);
       mediaStream.current = stream;
       mediaRecorder.current = new MediaRecorder(stream);
       mediaRecorder.current.ondataavailable = (e) => {
@@ -44,6 +46,7 @@ const VoiceRecorder = () => {
         track.stop();
       });
     }
+    setRecording(false);
   };
 
   const uploadRecording = (blob) => {
@@ -57,13 +60,23 @@ const VoiceRecorder = () => {
     };
     axios.post('http://localhost:8080/asr/', data, config);
   };
+
+
+  let recordCssClasses = 'voice';
+  // let stopCssClasses = 'voice';
+
+  if(recording) {
+    recordCssClasses += ' active';
+  } 
+  
+
   return (
     <>
       {/* <audio controls src={recordedUrl} /> */}
-      <button onClick={startRecording} className="voice">
+      <button onClick={startRecording} className={recordCssClasses} disabled={recording}>
         <img src={microphone} alt="start recording" className="voice-img" />
       </button>
-      <button onClick={stopRecording} className="voice">
+      <button onClick={stopRecording} className='voice' disabled={!recording}>
         <img src={stop} className="voice-stop" alt="stop recording" />
       </button>
     </>

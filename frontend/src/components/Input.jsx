@@ -32,7 +32,7 @@ export default function Input() {
 
     setTimeout(()=> {
       addMessage({ id: Date.now() + 1, message: "...", sender: "ChatBot" });
-    },1000);
+    },500);
     // addMessage({ id: Date.now() + 1, message: "...", sender: "ChatBot" });
 
     // simulation of backend processing
@@ -44,7 +44,7 @@ export default function Input() {
         sender: "ChatBot",
       });
       //setTyping(false);
-    }, 3000); // Simulate a 2-second delay for the backend response
+    }, 3500); // Simulate a delay for the backend response
 
     console.log("Entered message: ", enteredMessage);
     console.log("Context messages: ", messages);

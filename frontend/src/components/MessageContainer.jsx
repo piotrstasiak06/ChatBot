@@ -19,8 +19,14 @@ export default function MessageContainer() {
                 <p>
                   <strong>{message.sender}:</strong>{" "}
                   {message.message.includes("...") ? (
-                    <span className="dots"></span>
+                   
+                    <span className="dots">
+                      <span>.</span>
+                      <span>.</span>
+                      <span>.</span>
+                    </span>
                   ) : (
+      
                     message.message
                   )}
                 </p>

@@ -1,9 +1,13 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import PropTypes from "prop-types";
 
+// state/context
 export const ChatContext = createContext({
   messages: [{ message: "Hello, I am ChatBot!", sender: "ChatBot", id: 0 }],
   addMessage: () => {},
+  // setTyping: () => {},
+  updateLastMessage: () => {},
+  //typing: false,  // indicator whether the chatbot ise typing/fetching data from backend
 });
 
 function messageReducer(state, action) {
@@ -12,8 +16,16 @@ function messageReducer(state, action) {
       messages: state.messages.concat(action.payload),
     };
   }
+  if(action.type === "UPDATE_LAST_MESSAGE") {
+    return {
+      messages: state.messages.map((msg, index) =>
+        index === state.messages.length - 1 ? action.payload : msg
+      ),
+    };
+    }
   return state;
-}
+  }
+
 
 export default function ChatContextProvider({ children }) {
   const [messageState, messageDispatch] = useReducer(messageReducer, {
@@ -39,15 +51,36 @@ export default function ChatContextProvider({ children }) {
     ],
   });
 
+  const [typing, setTyping] = useState(false);
+
   function addMessage(message) {
     messageDispatch({
       type: "ADD_MESSAGE",
       payload: message,
     });
   }
+
+  // const updateLastMessage = (updatedMessage) => {
+  //   setMessages((prevMessages) => {
+  //     const newMessages = [...prevMessages];
+  //     newMessages[newMessages.length - 1] = updatedMessage;
+  //     return newMessages;
+  //   });
+  // };
+
+  const updateLastMessage = (updatedMessage) => {
+    messageDispatch({
+      type: "UPDATE_LAST_MESSAGE",
+      payload: updatedMessage,
+    });
+  };
+
   const context = {
     messages: messageState.messages,
     addMessage: addMessage,
+    // setTyping: setTyping,
+    // typing: typing,
+    updateLastMessage: updateLastMessage,
   };
 
   return (

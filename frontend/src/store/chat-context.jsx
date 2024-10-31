@@ -1,9 +1,12 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import PropTypes from "prop-types";
 
+// state/context
 export const ChatContext = createContext({
   messages: [{ message: "Hello, I am ChatBot!", sender: "ChatBot", id: 0 }],
   addMessage: () => {},
+  setTyping: () => {},
+  typing: false,  // indicator whether the chatbot ise typing/fetching data from backend
 });
 
 function messageReducer(state, action) {
@@ -39,6 +42,9 @@ export default function ChatContextProvider({ children }) {
     ],
   });
 
+  const [typing, setTyping] = useState(false);
+
+
   function addMessage(message) {
     messageDispatch({
       type: "ADD_MESSAGE",
@@ -48,6 +54,8 @@ export default function ChatContextProvider({ children }) {
   const context = {
     messages: messageState.messages,
     addMessage: addMessage,
+    setTyping: setTyping,
+    typing: typing,
   };
 
   return (

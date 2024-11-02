@@ -4,7 +4,7 @@ import { useContext } from "react";
 import VoiceRecorder from "./voiceRecorder";
 
 export default function Input() {
-  const { addMessage, updateLastMessage } = useContext(ChatContext);
+  const { addMessage, addDummyResponse } = useContext(ChatContext);
   const [error, setError] = useState("");
   const [enteredMessage, setEnteredMessage] = useState({
     message: "",
@@ -20,30 +20,17 @@ export default function Input() {
       setError("Message cannot be empty");
       return;
     }
+    const timestamp = Date.now();
     addMessage({
-      id: Date.now(),
+      id: timestamp,
       message: enteredMessage.message,
       sender: "user",
     });
     setEnteredMessage({ message: "" });
     setError("");
 
-    setTimeout(() => {
-      //
-      addMessage({ id: Date.now() + 1, message: "...", sender: "ChatBot" });
-    }, 500);
-
-    // simulation of backend processing
-    setTimeout(() => {
-      // Replace typing indicator with actual response
-      updateLastMessage({
-        id: Date.now(),
-        message: "This is the response from ChatBot.",
-        sender: "ChatBot",
-      });
-      //setTyping(false);
-    }, 3500); // Simulate a delay for the backend response
-  };
+    addDummyResponse(timestamp)
+  }
 
   return (
     <>
@@ -57,6 +44,12 @@ export default function Input() {
               handleInputChange("message", event.target.value)
             }
             value={enteredMessage.message}
+             onKeyDown={(event) => {
+              if(event.key === 'Enter') {
+                event.preventDefault();
+                handleSubmitMessage(event);
+              }
+            }}
           />
           <div className="button-row">
             <VoiceRecorder />

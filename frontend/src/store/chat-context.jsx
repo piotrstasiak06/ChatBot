@@ -107,13 +107,26 @@ export default function ChatContextProvider({ children }) {
     });
   };
 
+  const addDummyResponse = (timestamp) => {
+    setTimeout(() => {
+      addMessage({ id: timestamp + 1, message: "...", sender: "ChatBot" });
+      setTimeout(() => {
+        updateLastMessage({
+          id: timestamp + 1,
+          message: "This is a dummy response.",
+          sender: "ChatBot",
+        });
+      }, 3000);
+    }, 500);
+    updateLastMessage;
+  }
+
   // real context based on state
   const context = {
     messages: messageState.messages,
     addMessage: addMessage,
-    // setTyping: setTyping,
-    // typing: typing,
     updateLastMessage: updateLastMessage,
+    addDummyResponse: addDummyResponse
   };
 
   return (

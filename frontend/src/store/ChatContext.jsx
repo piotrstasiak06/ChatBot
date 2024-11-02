@@ -6,10 +6,9 @@ export const ChatContext = createContext({
   messages: [
     {
       message: "Hello, I am ChatBot!",
-
       sender: "ChatBot",
-
       id: Date.now(),
     },
   ],
+  addDummyResponse: () => {}
 });

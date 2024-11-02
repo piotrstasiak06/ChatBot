@@ -1,11 +1,10 @@
-import { ChatContext } from "../store/chat-context";
+import { ChatContext } from "../store/ChatContext";
 import { useState } from "react";
 import { useContext } from "react";
 import VoiceRecorder from "./voiceRecorder";
 
 export default function Input() {
-  const { messages, addMessage, setTyping, updateLastMessage } =
-    useContext(ChatContext);
+  const { addMessage, updateLastMessage } = useContext(ChatContext);
   const [error, setError] = useState("");
   const [enteredMessage, setEnteredMessage] = useState({
     message: "",
@@ -28,12 +27,11 @@ export default function Input() {
     });
     setEnteredMessage({ message: "" });
     setError("");
-    //setTyping(true); // show bot typing indicator
 
-    setTimeout(()=> {
+    setTimeout(() => {
+      //
       addMessage({ id: Date.now() + 1, message: "...", sender: "ChatBot" });
-    },500);
-    // addMessage({ id: Date.now() + 1, message: "...", sender: "ChatBot" });
+    }, 500);
 
     // simulation of backend processing
     setTimeout(() => {
@@ -45,9 +43,6 @@ export default function Input() {
       });
       //setTyping(false);
     }, 3500); // Simulate a delay for the backend response
-
-    console.log("Entered message: ", enteredMessage);
-    console.log("Context messages: ", messages);
   };
 
   return (

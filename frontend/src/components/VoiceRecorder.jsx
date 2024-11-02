@@ -2,7 +2,7 @@ import { useRef, useState} from "react";
 import microphone from "../assets/icons8-mic-80.png";
 import stop from "../assets/32px-Solid_white.svg.png";
 import { useContext } from "react";
-import { ChatContext } from "../store/chat-context";
+import { ChatContext } from "../store/ChatContext";
 import axios from "axios";
 
 const VoiceRecorder = () => {

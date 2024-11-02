@@ -2,11 +2,11 @@ import { useRef, useState} from "react";
 import microphone from "../assets/icons8-mic-80.png";
 import stop from "../assets/32px-Solid_white.svg.png";
 import { useContext } from "react";
-import { ChatContext } from "../store/chat-context";
+import { ChatContext } from "../store/ChatContext";
 import axios from "axios";
 
 const VoiceRecorder = () => {
-  const { addMessage } = useContext(ChatContext);
+  const { addMessage,addDummyResponse } = useContext(ChatContext);
 
 //   const [recordedUrl, setRecordedUrl] = useState("");
   const [recording, setRecording] = useState(false);
@@ -27,8 +27,9 @@ const VoiceRecorder = () => {
       mediaRecorder.current.onstop = () => {
         const recordedBlob = new Blob(chunks.current, { type: "audio/webm" });
         const url = URL.createObjectURL(recordedBlob);
-        // setRecordedUrl(url);
-        addMessage({ message: url, type: "audio" });
+        const timestamp = Date.now();
+        addMessage({ message: url, type: "audio",sender:"user", id:timestamp});
+        addDummyResponse(timestamp)
         uploadRecording(recordedBlob);
         chunks.current = [];
       };
@@ -61,7 +62,6 @@ const VoiceRecorder = () => {
     axios.post('http://localhost:8080/asr/', data, config);
   };
 
-
   let recordCssClasses = 'voice';
   // let stopCssClasses = 'voice';
 
@@ -69,11 +69,10 @@ const VoiceRecorder = () => {
     recordCssClasses += ' active';
   } 
   
-
   return (
     <>
       {/* <audio controls src={recordedUrl} /> */}
-      <button onClick={startRecording} className={recordCssClasses} disabled={recording}>
+      <button onClick={startRecording} className={recordCssClasses} disabled={recording} >
         <img src={microphone} alt="start recording" className="voice-img" />
       </button>
       <button onClick={stopRecording} className='voice' disabled={!recording}>

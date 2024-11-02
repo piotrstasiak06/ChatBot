@@ -1,11 +1,10 @@
-import { ChatContext } from "../store/chat-context";
+import { ChatContext } from "../store/ChatContext";
 import { useState } from "react";
 import { useContext } from "react";
 import VoiceRecorder from "./voiceRecorder";
 
 export default function Input() {
-  const { messages, addMessage, setTyping, updateLastMessage } =
-    useContext(ChatContext);
+  const { addMessage, addDummyResponse } = useContext(ChatContext);
   const [error, setError] = useState("");
   const [enteredMessage, setEnteredMessage] = useState({
     message: "",
@@ -19,36 +18,20 @@ export default function Input() {
     event.preventDefault();
     if (enteredMessage.message.trim() === "") {
       setError("Message cannot be empty");
+      console.log("Error: ",error);
       return;
     }
+    const timestamp = Date.now();
     addMessage({
-      id: Date.now(),
+      id: timestamp,
       message: enteredMessage.message,
       sender: "user",
     });
     setEnteredMessage({ message: "" });
     setError("");
-    //setTyping(true); // show bot typing indicator
 
-    setTimeout(()=> {
-      addMessage({ id: Date.now() + 1, message: "...", sender: "ChatBot" });
-    },1000);
-    // addMessage({ id: Date.now() + 1, message: "...", sender: "ChatBot" });
-
-    // simulation of backend processing
-    setTimeout(() => {
-      // Replace typing indicator with actual response
-      updateLastMessage({
-        id: Date.now(),
-        message: "This is the response from ChatBot.",
-        sender: "ChatBot",
-      });
-      //setTyping(false);
-    }, 3000); // Simulate a 2-second delay for the backend response
-
-    console.log("Entered message: ", enteredMessage);
-    console.log("Context messages: ", messages);
-  };
+    addDummyResponse(timestamp)
+  }
 
   return (
     <>
@@ -62,6 +45,12 @@ export default function Input() {
               handleInputChange("message", event.target.value)
             }
             value={enteredMessage.message}
+             onKeyDown={(event) => {
+              if(event.key === 'Enter') {
+                event.preventDefault();
+                handleSubmitMessage(event);
+              }
+            }}
           />
           <div className="button-row">
             <VoiceRecorder />

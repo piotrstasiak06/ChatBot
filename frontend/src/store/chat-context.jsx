@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import { ChatContext } from "./ChatContext.jsx";
 
@@ -81,6 +81,8 @@ export default function ChatContextProvider({ children }) {
     ],
   });
 
+  const [isRecording, setIsRecording] = useState(false);
+
   function addMessage(message) {
     messageDispatch({
       type: "ADD_MESSAGE",
@@ -126,7 +128,9 @@ export default function ChatContextProvider({ children }) {
     messages: messageState.messages,
     addMessage: addMessage,
     updateLastMessage: updateLastMessage,
-    addDummyResponse: addDummyResponse
+    addDummyResponse: addDummyResponse,
+    isRecording: isRecording,
+    setIsRecording: setIsRecording
   };
 
   return (

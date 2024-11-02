@@ -4,7 +4,7 @@ import { useContext } from "react";
 import VoiceRecorder from "./voiceRecorder";
 
 export default function Input() {
-  const { addMessage, addDummyResponse } = useContext(ChatContext);
+  const { addMessage, addDummyResponse, isRecording } = useContext(ChatContext);
   const [error, setError] = useState("");
   const [enteredMessage, setEnteredMessage] = useState({
     message: "",
@@ -33,6 +33,10 @@ export default function Input() {
     addDummyResponse(timestamp)
   }
 
+  const clearInput = () => {
+    setEnteredMessage({ message: "" });
+  }
+  
   return (
     <>
       <div className="input">
@@ -51,9 +55,10 @@ export default function Input() {
                 handleSubmitMessage(event);
               }
             }}
+            disabled={isRecording}
           />
           <div className="button-row">
-            <VoiceRecorder />
+            <VoiceRecorder/>
             <button type="submit">{"\u279C"}</button>
           </div>
         </form>

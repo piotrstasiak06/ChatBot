@@ -10,5 +10,6 @@ export const ChatContext = createContext({
       id: Date.now(),
     },
   ],
-  addDummyResponse: () => {}
+  addDummyResponse: () => {},
+  setIsRecording: () => {},
 });

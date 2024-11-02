@@ -6,17 +6,20 @@ import { ChatContext } from "../store/ChatContext";
 import axios from "axios";
 
 const VoiceRecorder = () => {
-  const { addMessage,addDummyResponse } = useContext(ChatContext);
+  const { addMessage,addDummyResponse, setIsRecording } = useContext(ChatContext);
 
 //   const [recordedUrl, setRecordedUrl] = useState("");
   const [recording, setRecording] = useState(false);
   const mediaStream = useRef(null);
   const mediaRecorder = useRef(null);
   const chunks = useRef([]);
-  const startRecording = async () => {
+  const startRecording = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       setRecording(true);
+      setIsRecording(true);
       mediaStream.current = stream;
       mediaRecorder.current = new MediaRecorder(stream);
       mediaRecorder.current.ondataavailable = (e) => {
@@ -38,7 +41,9 @@ const VoiceRecorder = () => {
       console.error("Error accessing microphone:", error);
     }
   };
-  const stopRecording = () => {
+  const stopRecording = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
     if (mediaRecorder.current && mediaRecorder.current.state === "recording") {
       mediaRecorder.current.stop();
     }
@@ -48,6 +53,7 @@ const VoiceRecorder = () => {
       });
     }
     setRecording(false);
+    setIsRecording(false)
   };
 
   const uploadRecording = (blob) => {

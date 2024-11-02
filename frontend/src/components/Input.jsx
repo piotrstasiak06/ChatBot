@@ -18,6 +18,7 @@ export default function Input() {
     event.preventDefault();
     if (enteredMessage.message.trim() === "") {
       setError("Message cannot be empty");
+      console.log("Error: ",error);
       return;
     }
     const timestamp = Date.now();

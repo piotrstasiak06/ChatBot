@@ -4,7 +4,7 @@ import { useContext } from "react";
 import VoiceRecorder from "./VoiceRecorder.jsx";
 
 export default function Input() {
-  const { addMessage, addDummyResponse, isRecording } = useContext(ChatContext);
+  const { addMessage, addDummyResponse, isRecording, isFetching } = useContext(ChatContext);
   const [error, setError] = useState("");
   const [enteredMessage, setEnteredMessage] = useState({
     message: "",
@@ -52,7 +52,7 @@ export default function Input() {
                 handleSubmitMessage(event);
               }
             }}
-            disabled={isRecording}
+            disabled={isRecording || isFetching}
           />
           <div className="button-row">
             <VoiceRecorder/>

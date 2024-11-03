@@ -83,8 +83,10 @@ export default function ChatContextProvider({ children }) {
   });
 
   const [isRecording, setIsRecording] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
 
   function addMessage(message) {
+    setIsFetching(true);
     messageDispatch({
       type: "ADD_MESSAGE",
       payload: message,
@@ -122,6 +124,7 @@ export default function ChatContextProvider({ children }) {
           message: "This is a dummy response.",
           sender: "ChatBot",
         });
+        setIsFetching(false);
       }, 3000);
     }, 500);
   };
@@ -145,6 +148,7 @@ export default function ChatContextProvider({ children }) {
     isRecording: isRecording,
     setIsRecording: setIsRecording,
     scrollChatToBottom: scrollChatToBottom,
+    isFetching: isFetching
   };
 
   return (

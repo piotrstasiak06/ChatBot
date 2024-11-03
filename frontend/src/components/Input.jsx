@@ -1,7 +1,7 @@
 import { ChatContext } from "../store/ChatContext";
 import { useState } from "react";
 import { useContext } from "react";
-import VoiceRecorder from "./voiceRecorder";
+import VoiceRecorder from "./VoiceRecorder.jsx";
 
 export default function Input() {
   const { addMessage, addDummyResponse, isRecording } = useContext(ChatContext);

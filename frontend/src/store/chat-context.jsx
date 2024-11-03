@@ -11,8 +11,9 @@ function messageReducer(state, action) {
   }
   if (action.type === "UPDATE_LAST_MESSAGE") {
     return {
-      messages: state.messages.map((msg, index) =>
-        index === state.messages.length - 1 ? action.payload : msg // replace last message with new data ('...' for fetched response)
+      messages: state.messages.map(
+        (msg, index) =>
+          index === state.messages.length - 1 ? action.payload : msg // replace last message with new data ('...' for fetched response)
       ),
     };
   }
@@ -20,7 +21,7 @@ function messageReducer(state, action) {
 }
 
 export default function ChatContextProvider({ children }) {
-  const [ messageState, messageDispatch ] = useReducer(messageReducer, {
+  const [messageState, messageDispatch] = useReducer(messageReducer, {
     // state initial values
     messages: [
       { message: "Hello, I am ChatBot!", sender: "ChatBot", id: 0 },
@@ -113,6 +114,9 @@ export default function ChatContextProvider({ children }) {
     setTimeout(() => {
       addMessage({ id: timestamp + 1, message: "...", sender: "ChatBot" });
       setTimeout(() => {
+        scrollChatToBottom();
+      }, 400);
+      setTimeout(() => {
         updateLastMessage({
           id: timestamp + 1,
           message: "This is a dummy response.",
@@ -120,7 +124,16 @@ export default function ChatContextProvider({ children }) {
         });
       }, 3000);
     }, 500);
-    updateLastMessage;
+  };
+
+  function scrollChatToBottom() {
+    const chat = document.getElementById("message-container");
+    if (chat) {
+      chat.scrollTo({
+        top: chat.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }
 
   // real context based on state
@@ -130,7 +143,8 @@ export default function ChatContextProvider({ children }) {
     updateLastMessage: updateLastMessage,
     addDummyResponse: addDummyResponse,
     isRecording: isRecording,
-    setIsRecording: setIsRecording
+    setIsRecording: setIsRecording,
+    scrollChatToBottom: scrollChatToBottom,
   };
 
   return (

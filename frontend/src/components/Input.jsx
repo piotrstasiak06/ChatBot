@@ -30,11 +30,7 @@ export default function Input() {
     setEnteredMessage({ message: "" });
     setError("");
 
-    addDummyResponse(timestamp)
-  }
-
-  const clearInput = () => {
-    setEnteredMessage({ message: "" });
+    addDummyResponse(timestamp) 
   }
   
   return (
@@ -44,6 +40,7 @@ export default function Input() {
           <input
             type="text"
             name="message"
+            autoComplete="off"
             placeholder="Type a message..."
             onChange={(event) =>
               handleInputChange("message", event.target.value)

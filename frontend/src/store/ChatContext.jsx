@@ -12,4 +12,5 @@ export const ChatContext = createContext({
   ],
   addDummyResponse: () => {},
   setIsRecording: () => {},
+  scrollChatToBottom: () => {},
 });

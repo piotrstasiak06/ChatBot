@@ -1,11 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ChatContext } from "../store/ChatContext";
 
 export default function MessageContainer() {
-  const { messages } = useContext(ChatContext);
+  const { messages, scrollChatToBottom } = useContext(ChatContext);
+
+  useEffect(() => {
+    scrollChatToBottom();
+  }, [messages, scrollChatToBottom]);
 
   return (
-    <div className="message-container">
+    <div className="message-container" id="message-container">
       {messages.length === 0 && <p>No messages yet.</p>}
       <ul>
         {messages.map((message) => (

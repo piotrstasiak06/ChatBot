@@ -119,14 +119,27 @@ export default function ChatContextProvider({ children }) {
         scrollChatToBottom();
       }, 400);
       setTimeout(() => {
-        updateLastMessage({
-          id: timestamp + 1,
-          message: "This is a dummy response.",
-          sender: "ChatBot",
-        });
+        typeMessage("This is a dummy response.", timestamp + 1); // data fetching function to add here
         setIsFetching(false);
       }, 3000);
     }, 500);
+  };
+
+  const typeMessage = (message, timestamp) => {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < message.length) {
+        updateLastMessage({
+          id: timestamp,
+          message: message.slice(0, index + 1),
+          sender: "ChatBot",
+        });
+        index++;
+      } else {
+        clearInterval(interval);
+        setIsFetching(false);
+      }
+    }, 50); // speed of typing
   };
 
   function scrollChatToBottom() {
@@ -148,7 +161,7 @@ export default function ChatContextProvider({ children }) {
     isRecording: isRecording,
     setIsRecording: setIsRecording,
     scrollChatToBottom: scrollChatToBottom,
-    isFetching: isFetching
+    isFetching: isFetching,
   };
 
   return (

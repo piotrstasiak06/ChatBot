@@ -120,7 +120,7 @@ export default function ChatContextProvider({ children }) {
       }, 400);
       setTimeout(() => {
         typeMessage("This is a dummy response.", timestamp + 1); // data fetching function to add here
-        setIsFetching(false);
+        
       }, 3000);
     }, 500);
   };
@@ -140,6 +140,7 @@ export default function ChatContextProvider({ children }) {
         setIsFetching(false);
       }
     }, 50); // speed of typing
+
   };
 
   function scrollChatToBottom() {

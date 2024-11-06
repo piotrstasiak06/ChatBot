@@ -17,7 +17,15 @@ cd ChatBot -> cd Frontend -> npm install -> npm run dev -> http://localhost:5173
 ***Proposed Usage***
 * curl -X POST -F "text=Hello, this is a test message" http://localhost:5000/upload
 * curl -X POST -F "wavfile=@path/to/your/recording.wav" http://localhost:5000/upload
-* 
+
+
+***Config***
+
+Jak to możliwe to dodać config dla requesta do API Open AI -> żeby response nie był typowym czatem tylko miał focus na język hiszpański i angielski. ( zwracanie uwagi na pisownie, słówka itd...)
+
+
+
+  
 # Preview nowoczesnego designu
 
 ![image](https://github.com/user-attachments/assets/bcaa0cf8-6ade-4e6b-9d85-0b7fa450afe6)

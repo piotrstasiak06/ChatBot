@@ -1,5 +1,5 @@
 export async function sendMessage(data) {
-    const response = await fetch("http://localhost:5174/test", { // Update the endpoint to match your backend route
+    const response = await fetch("http://localhost:5174/message", { // Update the endpoint to match your backend route
         method: "POST",
         headers: {
             'Content-Type': 'application/json'

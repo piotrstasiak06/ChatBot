@@ -62,10 +62,10 @@ const VoiceRecorder = () => {
     data.append('text', "this is the transcription of the audio file");
     data.append('wavfile', blob, "recording.wav");
 
-    // const config = {
-    //   headers: { 'content-type': 'multipart/form-data' }
-    // };
-    // axios.post('http://localhost:8080/asr/', data, config);
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' }
+    };
+    axios.post('http://localhost:8080/asr/', data, config);
   };
 
   let recordCssClasses = 'voice';

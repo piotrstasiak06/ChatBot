@@ -131,7 +131,7 @@ export default function ChatContextProvider({ children }) {
             console.error("Error fetching response:", error);
             typeMessage("Failed to fetch response.", timestamp + 1);
         }
-    }, 5000);
+    }, 3000);
     }, 500);
   };
 

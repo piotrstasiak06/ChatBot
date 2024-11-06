@@ -4,7 +4,7 @@ import { useContext } from "react";
 import VoiceRecorder from "./VoiceRecorder.jsx";
 
 export default function Input() {
-  const { addMessage, addDummyResponse, isRecording, isFetching } = useContext(ChatContext);
+  const { addMessage, addResponse, isRecording, isFetching } = useContext(ChatContext);
   const [error, setError] = useState("");
   const [enteredMessage, setEnteredMessage] = useState({
     message: "",
@@ -27,10 +27,11 @@ export default function Input() {
       message: enteredMessage.message,
       sender: "user",
     });
+    addResponse(timestamp,enteredMessage.message); 
     setEnteredMessage({ message: "" });
     setError("");
 
-    addDummyResponse(timestamp) 
+    
   }
   
   return (

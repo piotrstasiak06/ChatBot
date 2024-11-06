@@ -1,6 +1,7 @@
 import { useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import { ChatContext } from "./ChatContext.jsx";
+import { sendMessage } from '../http.js';
 
 function messageReducer(state, action) {
   // possible actions within a state
@@ -112,18 +113,32 @@ export default function ChatContextProvider({ children }) {
     });
   };
 
-  const addDummyResponse = (timestamp) => {
+  const addResponse = (timestamp,message) => {
     setTimeout(() => {
       addMessage({ id: timestamp + 1, message: "...", sender: "ChatBot" });
       setTimeout(() => {
         scrollChatToBottom();
       }, 400);
-      setTimeout(() => {
-        typeMessage("This is a dummy response.", timestamp + 1); // data fetching function to add here
-        setIsFetching(false);
-      }, 3000);
+      // setTimeout(async () => {
+      //   typeMessage("This is a dummy response.", timestamp + 1); // data fetching function to add here
+        
+      // }, 3000);
+      setTimeout(async () => {
+        try {
+            const response = await fetchResponse(message);
+            typeMessage(response, timestamp + 1);
+        } catch (error) {
+            console.error("Error fetching response:", error);
+            typeMessage("Failed to fetch response.", timestamp + 1);
+        }
+    }, 5000);
     }, 500);
   };
+
+  const fetchResponse = async (messageData) => {
+    const response = await sendMessage(messageData);
+    return response;
+};
 
   const typeMessage = (message, timestamp) => {
     let index = 0;
@@ -140,6 +155,7 @@ export default function ChatContextProvider({ children }) {
         setIsFetching(false);
       }
     }, 50); // speed of typing
+
   };
 
   function scrollChatToBottom() {
@@ -157,7 +173,7 @@ export default function ChatContextProvider({ children }) {
     messages: messageState.messages,
     addMessage: addMessage,
     updateLastMessage: updateLastMessage,
-    addDummyResponse: addDummyResponse,
+    addResponse: addResponse,
     isRecording: isRecording,
     setIsRecording: setIsRecording,
     scrollChatToBottom: scrollChatToBottom,

@@ -6,7 +6,7 @@ import { ChatContext } from "../store/ChatContext";
 import axios from "axios";
 
 const VoiceRecorder = () => {
-  const { addMessage,addDummyResponse, setIsRecording } = useContext(ChatContext);
+  const { addMessage,addResponse, setIsRecording } = useContext(ChatContext);
 
 //   const [recordedUrl, setRecordedUrl] = useState("");
   const [recording, setRecording] = useState(false);
@@ -32,7 +32,7 @@ const VoiceRecorder = () => {
         const url = URL.createObjectURL(recordedBlob);
         const timestamp = Date.now();
         addMessage({ message: url, type: "audio",sender:"user", id:timestamp});
-        addDummyResponse(timestamp)
+        addResponse(timestamp,url);
         uploadRecording(recordedBlob);
         chunks.current = [];
       };
@@ -62,10 +62,10 @@ const VoiceRecorder = () => {
     data.append('text', "this is the transcription of the audio file");
     data.append('wavfile', blob, "recording.wav");
 
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' }
-    };
-    axios.post('http://localhost:8080/asr/', data, config);
+    // const config = {
+    //   headers: { 'content-type': 'multipart/form-data' }
+    // };
+    // axios.post('http://localhost:8080/asr/', data, config);
   };
 
   let recordCssClasses = 'voice';

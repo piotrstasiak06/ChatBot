@@ -4,7 +4,7 @@ Chat Bot for learning english and spanish - Hala Madrid!
 
 # Chat Application
 
-This project consists of a backend and a frontend for a chat application. The backend is built with Node.js and Express, and the frontend is built with React.
+This project consists of a backend and a frontend for a chat application. The backend is built with Node.js and Express, and the frontend is built in React with ContextAPI.
 
 ## Prerequisites
 

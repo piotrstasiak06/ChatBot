@@ -1,5 +1,5 @@
 # ChatBot
-Chat Bot for learning english and spanish - Hala Madrid!
+Chat Bot for learning english and spanish
 
 
 # Chat Application

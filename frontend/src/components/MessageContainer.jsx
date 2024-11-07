@@ -10,7 +10,7 @@ export default function MessageContainer() {
 
   return (
     <div className="message-container" id="message-container">
-      {messages.length === 0 && <p>No messages yet.</p>}
+      {messages.length === 0 && <p></p>}
       <ul>
         {messages.map((message) => (
           <li

@@ -1,33 +1,108 @@
 # ChatBot
-Chat Bot with OpenAI API
-W projekcie muszązostać skonfigurowane reguły CORS.
-
-# Uruchomienie apki
-
-cd ChatBot -> cd Frontend -> npm install -> npm run dev -> http://localhost:5173
-
-# Backend / ENDPOINTY
-
--> **POST** 
-
-1. Handle both text and voice file uploads.If the request contains a text field, it processes the text data.
-2. Process the uploaded data and return the appropriate response.If the request contains a wavfile field, it saves and processes the audio file.
-3. Returns data in JSON format e.g {"message" : "This is dummy response"}
-
-***Proposed Usage***
-* curl -X POST -F "text=Hello, this is a test message" http://localhost:5000/upload
-* curl -X POST -F "wavfile=@path/to/your/recording.wav" http://localhost:5000/upload
+Chat Bot for learning english and spanish - Hala Madrid!
 
 
-***Config***
+# Chat Application
 
-Jak to możliwe to dodać config dla requesta do API Open AI -> żeby response nie był typowym czatem tylko miał focus na język hiszpański i angielski. ( zwracanie uwagi na pisownie, słówka itd...)
+This project consists of a backend and a frontend for a chat application. The backend is built with Node.js and Express, and the frontend is built with React.
+
+## Prerequisites
+
+- Node.js and npm installed on your machine.
+- OpenAI API key.
+
+## Setup
+
+### Backend
+
+1. **Navigate to the backend directory:**
+
+    ```sh
+    cd backend
+    ```
+
+2. **Install the dependencies:**
+
+    ```sh
+    npm install
+    ```
+
+3. **Create a `.env` file in the root directory of the project and add your OpenAI API key:**
+
+    ```env
+    OPENAI_API_KEY=your_openai_api_key_here
+    ```
+
+4. **Run the backend server:**
+
+    ```sh
+    node server.js
+    ```
+
+    The backend server will start on `http://localhost:5174`.
+
+### Frontend
+
+1. **Navigate to the frontend directory:**
+
+    ```sh
+    cd frontend
+    ```
+
+2. **Install the dependencies:**
+
+    ```sh
+    npm install
+    ```
+
+3. **Run the frontend development server:**
+
+    ```sh
+    npm run dev
+    ```
+
+    The frontend development server will start on `http://localhost:3000`.
+
+## Usage
+
+1. **Start the backend server:**
+
+    ```sh
+    cd backend
+    node server.js
+    ```
+
+2. **Start the frontend development server:**
+
+    ```sh
+    cd frontend
+    npm start
+    ```
+
+3. **Open your browser and navigate to `http://localhost:3000` to use the chat application.**
+
+## Project Structure
+
+- [backend](http://_vscodecontentref_/2): Contains the backend code.
+  - [server.js](http://_vscodecontentref_/3): The main server file for the backend.
+- [frontend](http://_vscodecontentref_/4): Contains the frontend code.
+  - `src/`: Contains the source code for the frontend.
+    - `components/`: Contains the React components.
+    - `store/`: Contains the context and state management code.
+    - [App.jsx](http://_vscodecontentref_/5): The main App component.
+    - `index.js`: The entry point for the React application.
+
+## Environment Variables
+
+- [OPENAI_API_KEY](http://_vscodecontentref_/6): Your OpenAI API key.
+
+## License
+
+This project is licensed under the MIT License.
 
 
 
-  
-# Preview nowoczesnego designu
 
-![image](https://github.com/user-attachments/assets/bcaa0cf8-6ade-4e6b-9d85-0b7fa450afe6)
+
 
 

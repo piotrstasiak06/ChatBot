@@ -6,7 +6,7 @@ import { ChatContext } from "../store/ChatContext";
 import axios from "axios";
 
 const VoiceRecorder = () => {
-  const { addMessage,addResponse, setIsRecording } = useContext(ChatContext);
+  const { addMessage,addDummyResponse, setIsRecording } = useContext(ChatContext);
 
 //   const [recordedUrl, setRecordedUrl] = useState("");
   const [recording, setRecording] = useState(false);
@@ -32,7 +32,8 @@ const VoiceRecorder = () => {
         const url = URL.createObjectURL(recordedBlob);
         const timestamp = Date.now();
         addMessage({ message: url, type: "audio",sender:"user", id:timestamp});
-        addResponse(timestamp,url);
+        addDummyResponse(timestamp);
+
         uploadRecording(recordedBlob);
         chunks.current = [];
       };

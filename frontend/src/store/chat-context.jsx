@@ -1,7 +1,7 @@
 import { useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import { ChatContext } from "./ChatContext.jsx";
-import { sendMessage } from '../http.js';
+import { sendMessage } from "../http.js";
 
 function messageReducer(state, action) {
   // possible actions within a state
@@ -24,63 +24,7 @@ function messageReducer(state, action) {
 export default function ChatContextProvider({ children }) {
   const [messageState, messageDispatch] = useReducer(messageReducer, {
     // state initial values
-    messages: [
-      { message: "Hello, I am ChatBot!", sender: "ChatBot", id: 0 },
-      { message: "I am user :)", sender: "user", id: 1 },
-      { message: "How can I help you?", sender: "ChatBot", id: 2 },
-      { message: "I am looking for a book", sender: "user", id: 3 },
-      {
-        message: "What kind of book are you looking for?",
-        sender: "ChatBot",
-        id: 4,
-      },
-      { message: "I am looking for a book about React", sender: "user", id: 5 },
-      {
-        message:
-          "I have a few books about React. Do you want me to show them to you?",
-        sender: "ChatBot",
-        id: 6,
-      },
-      { message: "Yes, please", sender: "user", id: 7 },
-      {
-        message:
-          "Here are some books about React: React Quickly, Learning React, and Pro React. Do you want more information about any of these books?",
-        sender: "ChatBot",
-        id: 8,
-      },
-      { message: "Yes, please", sender: "user", id: 9 },
-      {
-        message: "Which book would you like more information about?",
-        sender: "ChatBot",
-        id: 10,
-      },
-      { message: "React Quickly", sender: "user", id: 11 },
-      {
-        message:
-          "React Quickly is a book by Azat Mardan. It is a hands-on guide to learning React. It is 240 pages long. Do you want to know more about this book?",
-        sender: "ChatBot",
-        id: 12,
-      },
-      { message: "Yes, please", sender: "user", id: 13 },
-      {
-        message: "What would you like to know about React Quickly?",
-        sender: "ChatBot",
-        id: 14,
-      },
-      { message: "I would like to know the price", sender: "user", id: 15 },
-      {
-        message:
-          "React Quickly costs $25. Do you want to know more about this book?",
-        sender: "ChatBot",
-        id: 16,
-      },
-      { message: "No, thank you", sender: "user", id: 17 },
-      {
-        message: "You're welcome! Have a great day!",
-        sender: "ChatBot",
-        id: 18,
-      },
-    ],
+    messages: [],
   });
 
   const [isRecording, setIsRecording] = useState(false);
@@ -113,7 +57,7 @@ export default function ChatContextProvider({ children }) {
     });
   };
 
-  const addResponse = (timestamp,message) => {
+  const addResponse = (timestamp, message) => {
     setTimeout(() => {
       addMessage({ id: timestamp + 1, message: "...", sender: "ChatBot" });
       setTimeout(() => {
@@ -121,24 +65,38 @@ export default function ChatContextProvider({ children }) {
       }, 400);
       // setTimeout(async () => {
       //   typeMessage("This is a dummy response.", timestamp + 1); // data fetching function to add here
-        
+
       // }, 3000);
       setTimeout(async () => {
         try {
-            const response = await fetchResponse(message);
-            typeMessage(response, timestamp + 1);
+          const response = await fetchResponse(message);
+          typeMessage(response, timestamp + 1);
         } catch (error) {
-            console.error("Error fetching response:", error);
-            typeMessage("Failed to fetch response.", timestamp + 1);
+          console.error("Error fetching response:", error);
+          typeMessage("Failed to fetch response.", timestamp + 1);
         }
-    }, 3000);
+      }, 2000);
+    }, 500);
+  };
+
+  const addDummyResponse = (timestamp) => {
+    setTimeout(() => {
+      addMessage({ id: timestamp + 1, message: "...", sender: "ChatBot" });
+      setTimeout(() => {
+        scrollChatToBottom();
+      }, 400);
+      setTimeout(async () => {
+        typeMessage("Donate some money to developers to enable this function :)", timestamp + 1); // data fetching function to add here
+
+      }, 3000);
+      
     }, 500);
   };
 
   const fetchResponse = async (messageData) => {
     const response = await sendMessage(messageData);
     return response;
-};
+  };
 
   const typeMessage = (message, timestamp) => {
     let index = 0;
@@ -155,7 +113,6 @@ export default function ChatContextProvider({ children }) {
         setIsFetching(false);
       }
     }, 50); // speed of typing
-
   };
 
   function scrollChatToBottom() {
@@ -178,6 +135,7 @@ export default function ChatContextProvider({ children }) {
     setIsRecording: setIsRecording,
     scrollChatToBottom: scrollChatToBottom,
     isFetching: isFetching,
+    addDummyResponse: addDummyResponse,
   };
 
   return (

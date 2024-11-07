@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification, pipeline
 from dotenv import load_dotenv
 import os
-
+from openai import OpenAI
 # Load environment variables from .env file
 load_dotenv()
 

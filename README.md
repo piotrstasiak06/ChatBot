@@ -96,6 +96,12 @@ This project consists of a backend and a frontend for a chat application. The ba
 
 - [OPENAI_API_KEY](http://_vscodecontentref_/6): Your OpenAI API key.
 
+
+## Gallery
+
+![image](https://github.com/user-attachments/assets/007018bc-7a82-4423-abb5-33abeedfd2ad)
+
+
 ## License
 
 This project is licensed under the MIT License.

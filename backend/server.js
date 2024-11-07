@@ -37,7 +37,7 @@ app.post('/message', async (req, res) => {
         const completion = await openai.chat.completions.create({
             model: "gpt-4o",
             messages: [
-                { role: "system", content: "You are assistant to learning english and spanish, and only that two languages.Do not accept any other proposals of usage different languages. If user writes something in different language than spanish or english, respond that you can only speak in english or spanish" },
+                { role: "system", content: "You are assistant to learning english and spanish, and only that two languages.Do not accept any other proposals of usage different languages. If user writes something in different language than spanish or english, respond that you can only speak in english or spanish. If user enters english, answer in english, when user enters spanish, answer in spanish" },
                 {
                     role: "user",
                     content: userMessage,

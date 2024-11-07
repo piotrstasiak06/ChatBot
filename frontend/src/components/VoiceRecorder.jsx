@@ -6,7 +6,7 @@ import { ChatContext } from "../store/ChatContext";
 import axios from "axios";
 
 const VoiceRecorder = () => {
-  const { addMessage,addDummyResponse, setIsRecording } = useContext(ChatContext);
+  const { addMessage,addResponse, setIsRecording } = useContext(ChatContext);
 
 //   const [recordedUrl, setRecordedUrl] = useState("");
   const [recording, setRecording] = useState(false);
@@ -32,9 +32,9 @@ const VoiceRecorder = () => {
         const url = URL.createObjectURL(recordedBlob);
         const timestamp = Date.now();
         addMessage({ message: url, type: "audio",sender:"user", id:timestamp});
-        addDummyResponse(timestamp);
-
-        uploadRecording(recordedBlob);
+        // addDummyResponse(timestamp);
+        uploadRecording(recordedBlob, timestamp+1);
+        // uploadRecording(recordedBlob);
         chunks.current = [];
       };
       mediaRecorder.current.start();
@@ -57,16 +57,23 @@ const VoiceRecorder = () => {
     setIsRecording(false)
   };
 
-  const uploadRecording = (blob) => {
+  const uploadRecording = async (blob, timestamp) => {
     console.log("Uploading recording...");
     let data = new FormData();
-    data.append('text', "this is the transcription of the audio file");
-    data.append('wavfile', blob, "recording.wav");
+    data.append('audio', blob, "recording.webm");
 
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' }
-    };
-    axios.post('http://localhost:8080/asr/', data, config);
+    try {
+      const transcriptionResponse = await axios.post('http://localhost:5174/transcribe', data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+
+      const transcription = transcriptionResponse.data.text;
+      console.log("Transcription:", transcription);
+      addResponse(timestamp, transcription);
+    } catch (error) {
+      console.error("Error uploading recording:", error);
+      addResponse(timestamp, "Failed to transcribe audio.");
+    }
   };
 
   let recordCssClasses = 'voice';
